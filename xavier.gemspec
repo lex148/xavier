@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Xavier::VERSION
   gem.authors       = ["Lex Childs"]
   gem.email         = ["lexchilds@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{A frontend for the outpost chess engine}
+  gem.summary       = %q{A frontend for the outpost chess engine}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
