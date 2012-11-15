@@ -2,7 +2,7 @@ module Xavier
   class Main < Gosu::Window
 
     def initialize
-      super 640,480, false
+      super 800,800, false
       self.caption = 'Xavier - Chess Master'
     end
 

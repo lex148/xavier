@@ -3,7 +3,7 @@ require 'helper'
 describe Xavier::Main do
 
   before do
-    @subject = Xavier::Main.new ''
+    @subject = Xavier::Main.new
   end
 
   it 'should be a class' do
