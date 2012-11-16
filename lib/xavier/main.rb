@@ -22,7 +22,7 @@ module Xavier
         end
       end
 
-      @squares.last.peace = Peace.new(self,:black,:queen)
+      @squares.last.peace = Peace.new(self,:black,:king)
     end
 
     def update
