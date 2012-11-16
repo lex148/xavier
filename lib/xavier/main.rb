@@ -49,15 +49,15 @@ module Xavier
         @squares.each{|k,s| s.deselect; s.unmark}
         @selected.select if @selected
         moves = @selected.model.piece.possible_moves
-        #moves = @board.squares.map{|s| s.notation}
         moves.each{|m| @squares[m.notation].mark }
       end
     end
 
     def move rank, file
-      if @selected.model.piece
-        to = @squares["#{file}#{rank}"]
-        @game.move @selected.model.piece, to.model if to.model
+      to = @squares["#{file}#{rank}"]
+      if @selected.model.piece && to
+        moves = @selected.model.piece.possible_moves.map{|m| m.notation}
+        @game.move @selected.model.piece, to.model if moves.index(to.model.notation)
         build_board
       end
       @selected = nil
