@@ -7,12 +7,19 @@ module Xavier
     attr_reader :rank, :file
 
 
-    def initialize( window, rank, file )
-      @window, @rank, @file = window, rank, file
+    def initialize( window, model )
+      @model = model
+      @window, @rank, @file = window, @model.rank, @model.file
       deselect
       @color = (rank + file_number) % 2 == 0 ? :black : :white
       @sprite = Gosu::Image.new(@window, "lib/xavier/sprites/#{@color}.png", true)
       @select_sprite = Gosu::Image.new(@window, "lib/xavier/sprites/selected.png", true)
+      build_piece
+    end
+
+    def build_piece
+      return nil if !@model.piece
+      @piece = Piece.new(@window, @model.piece)
     end
 
     def file_number

@@ -18,25 +18,25 @@ module Xavier
 
     def build_board
       @game.squares.each do |s|
-        @squares[s.notation] = Square.new(self, s.rank, s.file)
+        @squares[s.notation] = Square.new(self, s)
       end
       #populate
-      update_pieces
+      #update_pieces
     end
 
-    def populate
-      ( 0 .. @game.pieces.size ).each do |i|
-        @game.pieces[i].square = @game.squares[i] if @game.pieces[i]
-      end
-    end
+    #def populate
+    #  ( 0 .. @game.pieces.size ).each do |i|
+    #    @game.pieces[i].square = @game.squares[i] if @game.pieces[i]
+    #  end
+    #end
 
-    def update_pieces
-      @squares.each{|k,s| s.piece = nil }
-      @game.pieces.each do |p|
-        type = p.class.to_s.match(/\w+$/).to_s.downcase.to_sym
-        @squares[p.square.notation].piece = Piece.new( self, p.color, type ) if p.square
-      end
-    end
+    #def update_pieces
+    #  @squares.each{|k,s| s.piece = nil }
+    #  @game.pieces.each do |p|
+    #    type = p.class.to_s.match(/\w+$/).to_s.downcase.to_sym
+    #    @squares[p.square.notation].piece = Piece.new( self, p.color, type ) if p.square
+    #  end
+    #end
 
     def update
     end

@@ -2,11 +2,14 @@ module Xavier
 
   class Piece
 
-    def initialize( window, color, type )
-      @window, @color, @type = window, color, type
-      file = "lib/xavier/sprites/#{@color}_#{@type}.png"
+    def initialize( window, model )
+      type = model.class.to_s.match(/\w+$/).to_s.downcase.to_sym
+      @window, @model = window, model
+      file = "lib/xavier/sprites/#{model.color}_#{type}.png"
       @sprite = Gosu::Image.new(@window, file, true)
     end
+
+
 
     def draw( square )
       scale = 0.7
