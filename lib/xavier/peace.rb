@@ -9,7 +9,11 @@ module Xavier
 
 
     def draw( square )
-      @sprite.draw( (square.row - 1) * 100 , (square.file - 1) * 100, 2)
+      scale = 0.7
+      offset = ( 100 - ( 100 * scale ) ) / 2
+      x = (square.row - 1) * 100 + offset
+      y = (square.file - 1) * 100 + offset
+      @sprite.draw( x , y , 2,scale, scale)
     end
 
   end
