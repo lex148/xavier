@@ -14,6 +14,7 @@ module Xavier
       @color = (rank + file_number) % 2 == 0 ? :black : :white
       @sprite = Gosu::Image.new(@window, "lib/xavier/sprites/#{@color}.png", true)
       @select_sprite = Gosu::Image.new(@window, "lib/xavier/sprites/selected.png", true)
+      @marked_sprite = Gosu::Image.new(@window, "lib/xavier/sprites/marked.png", true)
       build_piece
     end
 
@@ -34,6 +35,14 @@ module Xavier
       @selected = false
     end
 
+    def mark
+      @marked = true
+    end
+
+    def unmark
+      @marked = false
+    end
+
 
     def draw
 
@@ -44,6 +53,7 @@ module Xavier
 
       self.piece.draw(self) if self.piece
       @select_sprite.draw( x,y , 4) if @selected
+      @marked_sprite.draw( x,y , 3) if @marked
     end
 
   end

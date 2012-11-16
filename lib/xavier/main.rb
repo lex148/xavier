@@ -8,6 +8,7 @@ module Xavier
       self.caption = 'Xavier - Chess Master'
       @squares = {}
       @game = Outpost::Board.new
+      puts @game.squares.select{ |p| p.piece }.map{|p|p.piece.class}
       build_board
     end
 
@@ -20,23 +21,8 @@ module Xavier
       @game.squares.each do |s|
         @squares[s.notation] = Square.new(self, s)
       end
-      #populate
-      #update_pieces
+
     end
-
-    #def populate
-    #  ( 0 .. @game.pieces.size ).each do |i|
-    #    @game.pieces[i].square = @game.squares[i] if @game.pieces[i]
-    #  end
-    #end
-
-    #def update_pieces
-    #  @squares.each{|k,s| s.piece = nil }
-    #  @game.pieces.each do |p|
-    #    type = p.class.to_s.match(/\w+$/).to_s.downcase.to_sym
-    #    @squares[p.square.notation].piece = Piece.new( self, p.color, type ) if p.square
-    #  end
-    #end
 
     def update
     end
@@ -50,8 +36,10 @@ module Xavier
         rank = 9 - (mouse_y / 100.0).ceil
         file = ('a'..'h').to_a[(mouse_x / 100.0).ceil - 1]
         @selected = @squares["#{file}#{rank}"]
-        @squares.each{|k,s| s.deselect}
+        @squares.each{|k,s| s.deselect; s.unmark}
         @selected.select if @selected
+        moves = @game.squares.map{|s| s.notation}
+        moves.each{|m| @squares[m].mark }
       end
     end
 
