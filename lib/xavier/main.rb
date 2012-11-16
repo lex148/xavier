@@ -34,7 +34,6 @@ module Xavier
       if id == Gosu::MsLeft
         rank = 9 - (mouse_y / 100.0).ceil
         file = ('a'..'h').to_a[(mouse_x / 100.0).ceil - 1]
-        puts [rank, file, @selected]
         if @selected
           move rank, file
         else
@@ -44,8 +43,9 @@ module Xavier
     end
 
     def setSelection rank, file
-      @selected = @squares["#{file}#{rank}"]
-      if @selected.model.piece
+      found = @squares["#{file}#{rank}"]
+      if found.model.piece
+        @selected = found
         @squares.each{|k,s| s.deselect; s.unmark}
         @selected.select if @selected
         moves = @board.squares.map{|s| s.notation}
