@@ -10,7 +10,7 @@ module Xavier
     def initialize( window, rank, file )
       @window, @rank, @file = window, rank, file
       deselect
-      @color = (rank + file_number) % 2 == 0 ? :white : :black
+      @color = (rank + file_number) % 2 == 0 ? :black : :white
       @sprite = Gosu::Image.new(@window, "lib/xavier/sprites/#{@color}.png", true)
       @select_sprite = Gosu::Image.new(@window, "lib/xavier/sprites/selected.png", true)
     end
