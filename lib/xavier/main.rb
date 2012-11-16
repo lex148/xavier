@@ -35,12 +35,29 @@ module Xavier
       if id == Gosu::MsLeft
         rank = 9 - (mouse_y / 100.0).ceil
         file = ('a'..'h').to_a[(mouse_x / 100.0).ceil - 1]
-        @selected = @squares["#{file}#{rank}"]
-        @squares.each{|k,s| s.deselect; s.unmark}
-        @selected.select if @selected
-        moves = @game.squares.map{|s| s.notation}
-        moves.each{|m| @squares[m].mark }
+        if @selected
+          move rank, file
+        else
+          setSelection rank, file
+        end
       end
+    end
+
+    def setSelection rank, file
+      @selected = @squares["#{file}#{rank}"]
+      if @selected.model.piece
+      @squares.each{|k,s| s.deselect; s.unmark}
+      @selected.select if @selected
+      moves = @game.squares.map{|s| s.notation}
+      moves.each{|m| @squares[m].mark }
+    end
+
+    def move rank, file
+      to = @squares["#{file}#{rank}"]
+      to.model.piece = @selected.model.piece
+      @selected.model.piece = nil
+      @squares.each{|k,s| s.deselect; s.unmark}
+      @selected = nil
     end
 
   end
