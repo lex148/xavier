@@ -21,7 +21,6 @@ module Xavier
 
     def select
       @selected = true
-
     end
 
     def deselect

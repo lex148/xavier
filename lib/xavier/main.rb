@@ -20,7 +20,7 @@ module Xavier
       @game.squares.each do |s|
         @squares[s.notation] = Square.new(self, s.rank, s.file)
       end
-      populate
+      #populate
       update_pieces
     end
 
