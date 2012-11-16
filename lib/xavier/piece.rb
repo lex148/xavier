@@ -5,7 +5,6 @@ module Xavier
     def initialize( window, color, type )
       @window, @color, @type = window, color, type
       file = "lib/xavier/sprites/#{@color}_#{@type}.png"
-      puts file
       @sprite = Gosu::Image.new(@window, file, true)
     end
 
