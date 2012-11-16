@@ -6,7 +6,8 @@ module Xavier
     def initialize
       super 800,800, false
       self.caption = 'Xavier - Chess Master'
-      @background_image = Gosu::Image.new(self, "lib/xavier/sprites/board.png", true)
+      @sprites = []
+      build_board
     end
 
     # Display cursor
@@ -14,11 +15,19 @@ module Xavier
       true
     end
 
+    def build_board
+      (1..8).each do |row|
+        (1..8).each do |file|
+          @sprites << Square.new(self, row, file)
+        end
+      end
+    end
+
     def update
     end
 
     def draw
-      @background_image.draw(0, 0, 0)
+      @sprites.each{|s| s.draw }
     end
 
   end
