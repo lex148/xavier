@@ -45,5 +45,13 @@ module Xavier
       @squares.each{|k,s| s.draw }
     end
 
+    def button_down(id)
+      if id == Gosu::MsLeft
+        rank = (mouse_y / 100.0).ceil
+        file = ('a'..'h').to_a[(mouse_x / 100.0).ceil - 1]
+        @select = @squares["#{rank}#{file}"]
+      end
+    end
+
   end
 end
