@@ -6,7 +6,7 @@ module Xavier
     def initialize
       super 800,800, false
       self.caption = 'Xavier - Chess Master'
-      @sprites = []
+      @squares = []
       build_board
     end
 
@@ -18,16 +18,18 @@ module Xavier
     def build_board
       (1..8).each do |row|
         (1..8).each do |file|
-          @sprites << Square.new(self, row, file)
+          @squares << Square.new(self, row, file)
         end
       end
+
+      @squares.last.peace = Peace.new(self,:black,:queen)
     end
 
     def update
     end
 
     def draw
-      @sprites.each{|s| s.draw }
+      @squares.each{|s| s.draw }
     end
 
   end
