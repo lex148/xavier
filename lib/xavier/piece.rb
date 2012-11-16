@@ -11,8 +11,8 @@ module Xavier
     def draw( square )
       scale = 0.8
       offset = ( 100 - ( 100 * scale ) ) / 2
-      x = (square.rank - 1) * 100 + offset + 13
-      y = (square.file_number - 1) * 100 + offset - 17
+      x = (square.file_number - 1) * 100 + offset - 17
+      y = (square.rank - 1) * 100 + offset + 13
       @sprite.draw( x , y , 2,scale, scale)
     end
 

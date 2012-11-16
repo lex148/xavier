@@ -52,7 +52,6 @@ module Xavier
         @selected = @squares["#{file}#{rank}"]
         @squares.each{|k,s| s.deselect}
         @selected.select if @selected
-        puts "#{file}#{rank}"
       end
     end
 

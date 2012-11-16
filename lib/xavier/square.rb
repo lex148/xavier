@@ -30,9 +30,14 @@ module Xavier
 
 
     def draw
-      @sprite.draw( (rank - 1) * 100 , (file_number - 1) * 100, 1)
+
+      x = (self.file_number - 1) * 100
+      mirror_rank = 9 - rank
+      y = (mirror_rank - 1) * 100
+      @sprite.draw( x , y , 1)
+
       self.piece.draw(self) if self.piece
-      @select_sprite.draw( (rank - 1) * 100 , (file_number - 1) * 100, 4) if @selected
+      @select_sprite.draw( x,y , 4) if @selected
     end
 
   end
