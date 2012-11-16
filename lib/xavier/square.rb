@@ -3,7 +3,7 @@ module Xavier
 
   class Square
 
-    attr_accessor :piece
+    attr_accessor :piece, :model
     attr_reader :rank, :file
 
 

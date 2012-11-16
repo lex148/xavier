@@ -2,6 +2,8 @@ module Xavier
 
   class Piece
 
+    attr_accessor :model
+
     def initialize( window, model )
       type = model.class.to_s.match(/\w+$/).to_s.downcase.to_sym
       @window, @model = window, model

@@ -7,8 +7,7 @@ module Xavier
       super 800,800, false
       self.caption = 'Xavier - Chess Master'
       @squares = {}
-      @game = Outpost::Board.new
-      puts @game.squares.select{ |p| p.piece }.map{|p|p.piece.class}
+      @game = Outpost::Game.new
       build_board
     end
 
@@ -18,10 +17,10 @@ module Xavier
     end
 
     def build_board
-      @game.squares.each do |s|
+      @board = @game.board
+      @board.squares.each do |s|
         @squares[s.notation] = Square.new(self, s)
       end
-
     end
 
     def update
@@ -35,6 +34,7 @@ module Xavier
       if id == Gosu::MsLeft
         rank = 9 - (mouse_y / 100.0).ceil
         file = ('a'..'h').to_a[(mouse_x / 100.0).ceil - 1]
+        puts [rank, file, @selected]
         if @selected
           move rank, file
         else
@@ -46,17 +46,19 @@ module Xavier
     def setSelection rank, file
       @selected = @squares["#{file}#{rank}"]
       if @selected.model.piece
-      @squares.each{|k,s| s.deselect; s.unmark}
-      @selected.select if @selected
-      moves = @game.squares.map{|s| s.notation}
-      moves.each{|m| @squares[m].mark }
+        @squares.each{|k,s| s.deselect; s.unmark}
+        @selected.select if @selected
+        moves = @board.squares.map{|s| s.notation}
+        moves.each{|m| @squares[m].mark }
+      end
     end
 
     def move rank, file
-      to = @squares["#{file}#{rank}"]
-      to.model.piece = @selected.model.piece
-      @selected.model.piece = nil
-      @squares.each{|k,s| s.deselect; s.unmark}
+      if @selected.model.piece
+        to = @squares["#{file}#{rank}"]
+        @game.move @selected.model.piece, to.model
+        build_board
+      end
       @selected = nil
     end
 
