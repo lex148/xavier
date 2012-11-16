@@ -8,7 +8,6 @@ module Xavier
       @sprite = Gosu::Image.new(@window, file, true)
     end
 
-
     def draw( square )
       scale = 0.8
       offset = ( 100 - ( 100 * scale ) ) / 2
